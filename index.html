@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLL & Attenuator Control</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase SDK 추가 -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+</head>
+<body>
+  <div class="frame">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Signal Logo">
+      </div>
+
+      <h2 class="menu-title">
+        <img src="assets/images/setting-icon.png" alt="Setting Icon">
+        Setting
+      </h2>
+
+      <div>
+        <h3 class="section-title">
+          <img src="assets/images/PLL-Frequency.png" alt="PLL Frequency Icon">
+          PLL Frequency
+        </h3>
+        <label>
+          <span>Frequency</span>
+          <div class="input-group">
+            <input type="number" id="freq" placeholder="Value">
+            <span>MHz</span>
+          </div>
+        </label>
+        <label>
+          <span>Reference frequency</span>
+          <div class="input-group">
+            <input type="number" id="ref-freq" placeholder="Value">
+            <span>MHz</span>
+          </div>
+        </label>
+        <label>
+          <span>Channel spacing</span>
+          <div class="input-group">
+            <input type="number" id="spacing" placeholder="Value">
+            <span>kHz</span>
+          </div>
+        </label>
+
+        <h3 class="section-title">
+          <img src="assets/images/Attenuation.png" alt="Attenuation Icon">
+          Attenuation
+        </h3>
+        <label>
+          <div class="input-group">
+            <input type="number" id="atten" placeholder="Value">
+            <span>dB</span>
+          </div>
+        </label>
+
+        <button class="apply-btn">Apply</button>
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <div class="content">
+      <div class="header-box">
+        <div class="header">
+          <h1>PLL & Attenuator Control</h1>
+          <p>A controller for PLL and attenuator using the RP2040.</p>
+        </div>
+      </div>
+
+      <div class="result">
+        <img src="assets/images/result-icon.png" alt="Result Icon">
+        Result
+      </div>
+
+      <div class="graph-container">
+        <!-- Graph Placeholder -->
+      </div>
+
+      <div class="info-cards">
+        <div class="card">
+            <img src="assets/images/temp-icon.png" alt="Temperature Icon">
+            <div class="card-content">
+                <p>Temperature</p>
+                <h2 id="temperature-value">--</h2>
+            </div>
+        </div>
+    
+        <div class="card">
+            <img src="assets/images/outputfre-icon.png" alt="Output Frequency Icon">
+            <div class="card-content">
+                <p>Output Frequency</p>
+                <h2 id="output-frequency-value">--</h2>
+            </div>
+        </div>
+    
+        <div class="card attenuation-group">
+            <img src="assets/images/atten-icon.png" alt="Attenuation Icon">
+            <div class="card-content">
+                <p>Attenuation</p>
+                <h2 id="attenuation-value">--</h2>
+            </div>
+        </div>
+    </div>
+      
+    </div>
+  </div>
+
+  <script>
+    // Firebase 설정
+    const firebaseConfig = {
+        apiKey: "AIzaSyAhFo6ogJvFeg-sdStFibZbBb15nfq3pQ",
+        authDomain: "iot-control-b0a74.firebaseapp.com",
+        databaseURL: "https://iot-control-b0a74-default-rtdb.firebaseio.com",
+        projectId: "iot-control-b0a74",
+        storageBucket: "iot-control-b0a74.appspot.com",
+        messagingSenderId: "748435648723",
+        appId: "1:748435648723:web:815f887974e56fda52a426",
+        measurementId: "G-DL3DEQNBKX"
+    };
+
+    // Firebase 초기화
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // 데이터 저장 (사용자가 입력한 값 저장)
+    document.querySelector(".apply-btn").addEventListener("click", function () {
+        let freq = document.getElementById("freq").value;
+        let refFreq = document.getElementById("ref-freq").value;
+        let spacing = document.getElementById("spacing").value;
+        let atten = document.getElementById("atten").value;
+
+        if (!freq || !spacing || !atten) {
+            alert("모든 값을 입력하세요!");
+            return;
+        }
+
+        // Firebase에 데이터 저장
+        db.ref("device_settings").set({
+            frequency: freq,
+            reference_frequency: refFreq,
+            channel_spacing: spacing,
+            attenuation: atten
+        });
+
+        alert("Data saved to Firebase!");
+    });
+
+    // Firebase 데이터 가져오기 (온도, 주파수, 어텐값 UI 업데이트)
+    function getData() {
+        db.ref("device_settings").on("value", (snapshot) => {
+            let data = snapshot.val();
+            if (data) {
+                document.getElementById("temperature-value").innerText = data.temperature || "--";
+                document.getElementById("output-frequency-value").innerText = data.frequency || "--";
+                document.getElementById("attenuation-value").innerText = data.attenuation || "--";
+            }
+        });
+    }
+
+    // 페이지 로딩 시 Firebase 데이터 자동 업데이트
+    getData();
+  </script>
+</body>
+</html>

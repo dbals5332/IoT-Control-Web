@@ -1,0 +1,227 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #F0F0F0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.frame {
+  width: 1440px;
+  height: 1024px;
+  background-color: #F0F0F0;
+  display: flex;
+}
+
+.sidebar {
+  width: 471px;
+  height: 1024px;
+  background-color: #1E1E1E;
+  color: #FFF;
+  padding: 58px 66px 95px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 67px;
+}
+
+.logo img {
+  width: 234.9px;
+  height: 67px;
+}
+
+.menu-title {
+  font-size: 20px;
+  color: #7A7A7A;
+  display: flex;
+  align-items: center;
+  margin-bottom: 43px;
+}
+
+.menu-title img {
+  width: 21px;
+  height: 21px;
+  margin-right: 10px;
+}
+
+.section-title {
+  font-size: 19.97px;
+  color: #44B5FB;
+  font-weight: 600;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 43px; /* Attenuation과 텍스트필드 간 거리 조정 */
+}
+
+.section-title img {
+  width: 21px;
+  height: auto;
+  margin-right: 10px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 43px; /* 라벨 그룹 간 간격 */
+  margin-left: 41px;
+}
+
+label span {
+  font-size: 14.16px;
+  font-weight: 500;
+  margin-bottom: 25px; /* 라벨과 입력 필드 간 간격 */
+}
+
+.input-group {
+  display: flex; /* 텍스트 필드와 단위를 가로로 배치 */
+  align-items: center; /* 텍스트 필드와 단위를 수직 중앙 정렬 */
+  gap: 12px; /* 텍스트 필드와 단위 간 간격 */
+}
+
+.input-group span {
+  font-size: 14.16px;
+  font-weight: 500;
+  margin-top: 12px; /* 단위를 살짝 아래로 조정 */
+}
+
+input {
+  width: 200px;
+  height: 40px;
+  background-color: #414040; /* 내부 색상 */
+  border: none; /* 테두리 없음 */
+  border-radius: 4.05px; /* 모서리 둥글기 */
+  padding: 5px 20px;
+  font-size: 16px;
+  line-height: 40px;
+  color: rgba(255, 255, 255, 0.59); /* 기본값 텍스트 투명도 41% */
+}
+
+.apply-btn {
+  width: 304px;
+  height: 56.64px;
+  background-color: #44B5FB;
+  border: none;
+  border-radius: 5px;
+  color: #FFF;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 0 55px;
+}
+
+.header-box {
+  width: 969px;
+  height: 166px;
+  background-color: #FFF;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 60px;
+  margin-left: -55px; /* 사이드바와 붙이기 위해 margin-left 조정 */
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.header h1 {
+  font-size: 37.69px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 0;
+}
+
+.header p {
+  font-size: 17.22px;
+  color: #000;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  font-size: 20px; font-weight: bold;
+  color: #7A7A7A;
+  margin-bottom: 29px;
+  margin-top: 30px;
+}
+
+.result img {
+  width: 21.48px;
+  height: 21px;
+  margin-right: 16px;
+}
+
+.graph-container {
+  background-color: #FFF;
+  width: 847px;
+  height: 438px;
+  border: 1px solid #DDD;
+  margin-bottom: 52px;
+}
+
+.info-cards {
+  display: flex;
+  justify-content: space-between;
+  background-color: #1E1E1E;
+  width: 847px;
+  height: 235px;
+  padding: 60px;
+  padding-right: 0px;
+  border-radius: 5px;
+  align-items: center; /* 아이콘과 텍스트를 수평 정렬 */
+}
+
+.card {
+  display: flex; /* 수평 정렬을 위한 플렉스 설정 */
+  align-items: center;
+  text-align: left; /* 텍스트 정렬 */
+  color: #FFF;
+  flex: 1;
+  gap: 20px; /* 아이콘과 텍스트 간의 간격 */
+}
+
+.card img {
+  width: 74px;
+  height: 74px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content p {
+  font-size: 14.25px;
+  margin: 0; /* 텍스트 간 간격 제거 */
+}
+
+.card-content h2 {
+  font-size: 31.26px;
+  font-weight: 800;
+  margin: 5px 0 0 0; /* 제목과 텍스트 간의 간격 설정 */
+}
+
+.attenuation-group {
+  padding-left: 25px;
+  padding-right: 0px; /* 원하는 패딩 값으로 변경 */
+}
+
